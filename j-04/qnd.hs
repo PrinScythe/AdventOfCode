@@ -7,10 +7,10 @@ type LineOrColumn = [Int]
 
 main :: IO ()
 main = do
-  putStrLn "--- Example ---"
-  resolve "example.txt"
-  --putStrLn "--- DataSet 1 ---"
-  --resolve "input1.txt"
+  --putStrLn "--- Example ---"
+  --resolve "example.txt"
+  putStrLn "--- DataSet 1 ---"
+  resolve "input1.txt"
   --putStrLn "\n--- DataSet 2 ---"
   --resolve "input2.txt"
 
@@ -20,7 +20,8 @@ resolve nameFile = do
   let tirage = map read (splitOn ',' (head content)) :: [Int]
   let rawLines = filter (/="") (tail content)
   putStrLn "Part One : "
-  print (part1 tirage rawLines)
+  c <- (part1 tirage rawLines)
+  print c
   --putStr "Part Two : "
   --print (part2 content)
 
@@ -47,19 +48,31 @@ rotate5 [a, b, c, d, e] = zipWith5 (\v w x y z -> [v, w, x, y, z]) a b c d e
 rotate5 _ = error "Please don't be silly"
 
 searchInGrid :: Int -> Int -> Grid -> Grid
-searchInGrid gridSize number grid = map searchInLine grid where
+searchInGrid gridSize number grid = checkGrid (map searchInLine grid) where
   searchInLine l@(count, sum, lc) = case find (== number) lc of
     Nothing -> l
-    Just _ -> if count == 4 then error ("win with : " ++ show (computeVictory gridSize number grid)) else (count + 1, sum - number, lc)
+    Just _ -> (count + 1, sum - number, lc)
+  checkGrid grid = case find ((== gridSize) . getCountFormLine) grid of
+    Nothing -> grid
+    Just x0 -> error ("Win With : " ++ show (computeVictory gridSize number grid))
+
+getCountFormLine :: (Int, Int, LineOrColumn) -> Int
+getCountFormLine (count, _, _) = count
+
+getSumFormLine :: (Int, Int, LineOrColumn) -> Int
+getSumFormLine (_, sum, _) = sum
 
 computeVictory :: Int -> Int -> Grid -> Int
-computeVictory gridSize number grid = number * (sum (map (\(x,y,z) -> y) (drop gridSize grid)) - number)
+computeVictory gridSize number grid = number * sum (map getSumFormLine (take gridSize grid))
 
 splitOn :: Char -> String -> [String]
 splitOn delimiter string = words (map (\c -> if c == delimiter then ' ' else c) string)
 
-part1 :: [Int] -> [String] -> [Grid]
-part1 tirage rawLines = foldl (\allGrids number -> map (searchInGrid 5 number) allGrids) gridInit tirage where
+part1 tirage rawLines = foldl (\allGrids number -> do
+    all <- allGrids
+    print all
+    return (map (searchInGrid 5 number) all)
+  ) gridsInit tirage where
   rawLinesGroupByGrid = splitGrid 5 rawLines
-  gridInit = map (initInfos . flatToGrid5) rawLinesGroupByGrid
+  gridsInit =  do return (reverse (map (initInfos . flatToGrid5) rawLinesGroupByGrid))
 
