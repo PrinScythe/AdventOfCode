@@ -6,11 +6,11 @@ type LineOrColumn = [Int]
 
 main :: IO ()
 main = do
-  --putStrLn "--- Example ---"
-  --resolve "example.txt"
+  putStrLn "--- Example ---"
+  resolve "example.txt"
   putStrLn "--- DataSet 1 ---"
   resolve "input1.txt"
-  putStrLn "\n--- DataSet 2 ---"
+  putStrLn "--- DataSet 2 ---"
   resolve "input2.txt"
 
 resolve :: FilePath -> IO ()
@@ -20,10 +20,9 @@ resolve nameFile = do
   let rawLines = filter (/="") (tail content)
   putStrLn "Part One : "
   c <- part1 tirage rawLines
-  print c
   putStrLn "Part Two : "
   c2 <- part2 tirage rawLines
-  print c2
+  print "the end"
 
 readInput :: FilePath -> IO [String]
 readInput nameFile = do
@@ -76,6 +75,7 @@ part1 = foundNthWinner 1
 part2 :: [Int] -> [String] -> IO [Grid]
 part2 tirage rawlines = foundNthWinner (length rawlines `div` 5) tirage rawlines
 
+foundNthWinner :: Int -> [Int] -> [String] -> IO [Grid]
 foundNthWinner nthWinner tirage rawLines = foldl (\allGrids number -> do
     all <- allGrids
     let gridsUpdated = map (searchInGrid 5 number) all
