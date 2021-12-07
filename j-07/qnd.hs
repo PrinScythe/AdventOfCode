@@ -29,7 +29,7 @@ splitOn "" string = [string]
 splitOn delimiters string = words (map (\c -> if c `elem` delimiters then ' ' else c) string)
 
 part1 :: [Int] -> Int
-part1 l = foldl (\acc cur -> acc + abs (cur - ecartType)) (head l - ecartType) (tail l) where
+part1 l = foldl (\acc cur -> acc + abs (cur - ecartType)) 0  l where
   ecartType = sort l !! (length l `div` 2 )
 
 
