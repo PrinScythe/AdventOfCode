@@ -29,19 +29,20 @@ splitOn :: String -> String -> [String]
 splitOn "" string = [string]
 splitOn delimiters string = lines (map (\c -> if c `elem` delimiters then '\n' else c) string)
 
-part1 :: [String] -> Integer
-part1 = sum
-  . map (\cur -> if length cur == 2 || length cur == 3 || length cur == 4 || length cur == 7 then 1 else 0 )
+part1 :: [String] -> Int
+part1 = length 
+  . filter (\cur -> length cur == 2 || length cur == 3 || length cur == 4 || length cur == 7)
   . concatMap (words . (last . splitOn "|"))
 
+part2 :: [String] -> Int
 part2 = sum . map computeNumberDisplayed
 
 computeNumberDisplayed :: String -> Int
 computeNumberDisplayed line = deductNumberFrom decoder digits where
   decoder = makeDecoder encodedSignals
-  digits = words (last splitRes)
-  encodedSignals = words (head splitRes)
-  splitRes = splitOn "|" line
+  digits = last splitRes
+  encodedSignals = head splitRes
+  splitRes = map words $ splitOn "|" line
 
 
 deductNumberFrom :: Map Int [Char] -> [String] -> Int
@@ -53,13 +54,12 @@ decode decoder word
   | length word == 3 = 7
   | length word == 4 = 4
   | length word == 7 = 8
-  | length word == 5 && (length ((decoder ! 7) `intersect` word) == 3) = 3
+  | length word == 5 && (length ((decoder ! 1) `intersect` word) == 2) = 3
   | length word == 5 && (length ((decoder ! 4) `intersect` word) == 2) = 2
   | length word == 5 = 5
   | length word == 6 && (length ((decoder ! 1) `intersect` word) == 1) = 6
   | length word == 6 && (length ((decoder ! 4) `intersect` word) == 4) = 9
   | length word == 6 = 0
-  | length word == 7 = 8
   | otherwise = error "Oops : Wrong Input"
 
 makeDecoder :: [[Char]] -> Map Int [Char]
@@ -68,9 +68,7 @@ makeDecoder = foldl completeDecoder empty
 completeDecoder :: Map Int [Char] -> [Char] -> Map Int [Char]
 completeDecoder decoder word
   | length word == 2 = foldl (associateLetterWithNumber 1) decoder word
-  | length word == 3 = foldl (associateLetterWithNumber 7) decoder word
   | length word == 4 = foldl (associateLetterWithNumber 4) decoder word
-  | length word == 7 = foldl (associateLetterWithNumber 8) decoder word
   | otherwise = decoder
 
 associateLetterWithNumber :: Int -> Map Int [Char] -> Char -> Map Int [Char]
