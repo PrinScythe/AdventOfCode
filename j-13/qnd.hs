@@ -52,8 +52,7 @@ foldAll :: Set.Set Point -> Instructions -> Set.Set Point
 foldAll = foldl foldAlong
 
 
-initPoints :: (Ord t1, Ord t2, Num t1, Num t2, Enum t1, Enum t2) =>
-t2 -> t1 -> Map.Map (t1, t2) [Char]
+initPoints :: Int -> Int -> Map.Map Point String
 initPoints width height = Map.fromList $ zip [(x, y) | x <- [0..height], y <- [0..width]] [" " | x <- [0..height], y <- [0..width]]
 
 foo :: (Set.Set Point, Instructions) -> String -> (Set.Set Point, Instructions)
@@ -66,7 +65,7 @@ foo acc@(points, instructions) line = case splitOn "," line of
     _ -> acc
 
 bar :: Set.Set Point -> Map.Map Point String
-bar = Set.foldl (\acc p -> Map.insert p "x" acc) (initPoints 10 40)
+bar = Set.foldl (\acc p -> Map.insert p "█" acc) (initPoints 7 40)
 
 
 test :: Ord a => a -> Set.Set a
