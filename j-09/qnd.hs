@@ -3,7 +3,6 @@ import Data.List (zip, sortOn)
 import qualified Data.Maybe
 import qualified Data.Map.Strict as Map
 import Data.Ord ( Down(Down) )
-
 type Point = (Int, Int)
 type Depth = Int
 type Value = Int
@@ -13,10 +12,10 @@ main :: IO ()
 main = do
   putStrLn "--- Example ---"
   resolve "example.txt"
-  --putStrLn "--- DataSet 1 ---"
-  --resolve "input1.txt"
-  --putStrLn "--- DataSet 2 ---"
-  --resolve "input2.txt"
+  putStrLn "--- DataSet 1 ---"
+  resolve "input1.txt"
+  putStrLn "--- DataSet 2 ---"
+  resolve "input2.txt"
 
 
 resolve :: FilePath -> IO ()
@@ -28,9 +27,7 @@ resolve nameFile = do
   putStr "Part One : "
   print $ part1 depthMap
   putStr "Part Two : "
-  print $ depthMap
-  print $ whatAmIDoing depthMap
-  print $ isThisThingWorking depthMap
+  print $  isThisThingWorking depthMap
 
 createPoints :: Int -> Int -> [Point]
 createPoints width height = [(x, y) | x <- [0..(height -1)], y <- [0..(width - 1)]]
@@ -64,17 +61,22 @@ getDepth oobAlwaysGreater value pos@(x, y) width height m = (value, length (Prel
     right = Data.Maybe.fromMaybe oobHeight (m Map.!? (x, y + 1))
     upDownLeftRight = [up, down, left, right]
 
-
 whatAmIDoing :: Map.Map Point (Value, Depth) -> Map.Map Int [Point]
 whatAmIDoing m = basins where
   (_, basins, _) = Map.foldlWithKey innerFun (Map.empty, Map.empty, 0) m
   innerFun acc _ (_, 4) = acc
-  innerFun (taPointBasin, taBasinPoint, nextBasin) point@(x, y) (_, _) =
-    case taPointBasin Map.!? (x - 1, y) of
-      Just basinNumber -> (Map.insert point basinNumber taPointBasin, Map.insertWith (++) basinNumber [point] taBasinPoint, nextBasin)
-      Nothing -> case taPointBasin Map.!? (x, y - 1) of
-        Just basinNumber -> (Map.insert point basinNumber taPointBasin, Map.insertWith (++)  basinNumber [point] taBasinPoint, nextBasin)
-        Nothing -> (Map.insert point nextBasin taPointBasin, Map.insert nextBasin [point] taBasinPoint, nextBasin + 1)
+  innerFun acc@(taPointBasin, taBasinPoint, nextBasin) point@(x, y) (_, _) =
+    case (taPointBasin Map.!? (x - 1, y),  taPointBasin Map.!? (x, y - 1)) of
+      (Nothing , Nothing) -> (Map.insert point nextBasin taPointBasin, Map.insert nextBasin [point] taBasinPoint, nextBasin + 1)
+      (Nothing, Just basinNumber) -> update acc point basinNumber
+      (Just basinNumber, Nothing) -> update acc point basinNumber
+      (Just basinNumber, Just basinNumber') -> if basinNumber ==  basinNumber' 
+        then update acc point basinNumber
+        else (foldl (\acc v -> Map.insert v basinNumber acc) (Map.insert point basinNumber taPointBasin) (taBasinPoint Map.! basinNumber'),
+         Map.insertWith (++) basinNumber (point : (taBasinPoint Map.! basinNumber')) (Map.delete basinNumber' taBasinPoint), 
+         nextBasin)
+  update (taPointBasin, taBasinPoint, next) point basinNumber = (Map.insert point basinNumber taPointBasin, Map.insertWith (++) basinNumber [point] taBasinPoint, next)
+  
 
 isThisThingWorking :: Map.Map Point (Value, Depth) -> Int
 isThisThingWorking m = product . take 3 . sortOn Down . map length . Map.elems $ whatAmIDoing m
