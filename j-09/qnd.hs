@@ -70,13 +70,13 @@ whatAmIDoing m = basins where
       (Nothing , Nothing) -> (Map.insert point nextBasin taPointBasin, Map.insert nextBasin [point] taBasinPoint, nextBasin + 1)
       (Nothing, Just basinNumber) -> update acc point basinNumber
       (Just basinNumber, Nothing) -> update acc point basinNumber
-      (Just basinNumber, Just basinNumber') -> if basinNumber ==  basinNumber' 
+      (Just basinNumber, Just basinNumber') -> if basinNumber ==  basinNumber'
         then update acc point basinNumber
-        else (foldl (\acc v -> Map.insert v basinNumber acc) (Map.insert point basinNumber taPointBasin) (taBasinPoint Map.! basinNumber'),
-         Map.insertWith (++) basinNumber (point : (taBasinPoint Map.! basinNumber')) (Map.delete basinNumber' taBasinPoint), 
+        else (foldl (\acc v -> Map.insert v basinNumber acc) taPointBasin (point : (taBasinPoint Map.! basinNumber')),
+         Map.insertWith (++) basinNumber (point : (taBasinPoint Map.! basinNumber')) (Map.delete basinNumber' taBasinPoint),
          nextBasin)
   update (taPointBasin, taBasinPoint, next) point basinNumber = (Map.insert point basinNumber taPointBasin, Map.insertWith (++) basinNumber [point] taBasinPoint, next)
-  
+
 
 isThisThingWorking :: Map.Map Point (Value, Depth) -> Int
 isThisThingWorking m = product . take 3 . sortOn Down . map length . Map.elems $ whatAmIDoing m
