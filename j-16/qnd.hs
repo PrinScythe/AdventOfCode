@@ -13,8 +13,9 @@ type TypeID = Int
 type Lenght = Int
 type Packet = Bits
 type Operation = [Madness] -> Int
+type Value = Int
 
-data Madness = Literal Version [Packet] | Operator Operation Version TypeID Bool Lenght [Madness] 
+data Madness = Literal Version Value | Operator Operation Version TypeID Bool Lenght [Madness] 
 
 main :: IO ()
 main = do
@@ -63,7 +64,7 @@ constructMadness bits = case bitsToInt . take 3 . drop 3 $ bits of
   _ -> error "I believed in you ... Y-Y"
 
 constructLiteral :: Bits -> (Bits, Madness)
-constructLiteral bits = (rest, Literal version subpacket) where
+constructLiteral bits = (rest, Literal version (bitsToInt $ concat subpacket)) where
   version = bitsToInt $ take 3 bits
   (rest, subpacket) = getLiteralSubPacket (drop 6 bits)
 
@@ -101,7 +102,7 @@ sumVersions madness = case madness of
 
 compute :: Madness -> Int
 compute m = case m of
-  Literal _ packets -> bitsToInt $ concat packets
+  Literal _ value-> value
   Operator op _ _ _ _ childs -> op childs
 
 
