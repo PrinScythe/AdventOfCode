@@ -23,7 +23,7 @@ resolve start1 start2 = do
   putStr "  -- Part 1 > "
   print $ computeLooser (resPlayer1, resPlayer2)
   putStr "  -- Part 2 > "
-  print $ quantumRec start1 start2 0 0 diceRolls
+  -- print $ quantumRec start1 start2 0 0 diceRolls
   print $ snd $ quantumRec' start1 start2 0 0 Map.empty diceRolls
 
 computeScoreTurn :: Int -> [Int] -> Int -> Int -> Int
