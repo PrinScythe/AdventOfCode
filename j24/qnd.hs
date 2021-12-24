@@ -1,0 +1,256 @@
+main :: IO()
+main = do
+  let (w, x, y, z) = (0,0,0,0)
+  w <- getLine
+  let x = x * 0
+  let x = x + z
+  let x = x `mod` 26
+  let z = z `div` 1
+  --let x = x + 13
+  --let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 0
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 1
+  -- let x = x + 11
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 3
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 1
+  -- let x = x + 14
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 8
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 26
+  -- let x = x + (-5)
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 5
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 1
+  -- let x = x + 14
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 13
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 1
+  -- let x = x + 10
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 9
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 1
+  -- let x = x + 12
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 6
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 26
+  -- let x = x + (-14)
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 1
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 26
+  -- let x = x + (-8)
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 1
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 1
+  -- let x = x + 13
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 2
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 26
+  -- let x = x + 0
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 7
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 26
+  -- let x = x + (-5)
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 5
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 26
+  -- let x = x + (-9)
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 8
+  -- let y = y * x
+  -- let z = z + y
+  -- w <- getLine
+  -- let x = x * 0
+  -- let x = x + z
+  -- let x = x `mod` 26
+  -- let z = z `div` 26
+  -- let x = x + (-1)
+  -- let x = if x == (read w) then 1 else 0
+  -- let x = if x == 0 then 1 else 0
+  -- let y = y * 0
+  -- let y = y + 25
+  -- let y = y * x
+  -- let y = y + 1
+  -- let z = z * y
+  -- let y = y * 0
+  -- let y = y + (read w)
+  -- let y = y + 15
+  -- let y = y * x
+  -- let z = z + y
+  putStrLn $ "The number is correct ? " ++ show z

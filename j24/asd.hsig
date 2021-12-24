@@ -1,0 +1,112 @@
+
+inp w
+bloc2
+div z 1
+add x 13
+bloc1
+add y 0
+bloc3
+
+inp w
+bloc2
+div z 1
+add x 11
+bloc1
+add y 3
+bloc3
+
+inp w
+bloc2
+div z 1
+add x 14
+bloc1
+add y 8
+bloc3
+
+inp w
+bloc2
+div z 26
+add x -5
+bloc1
+add y 5
+bloc3
+
+inp w
+bloc2
+div z 1
+add x 14
+bloc1
+add y 13
+bloc3
+
+inp w
+bloc2
+div z 1
+add x 10
+bloc1
+add y 9
+bloc3
+
+inp w
+bloc2
+div z 1
+add x 12
+bloc1
+add y 6
+bloc3
+
+inp w
+bloc2
+div z 26
+add x -14
+bloc1
+add y 1
+bloc3
+
+inp w
+bloc2
+div z 26
+add x -8
+bloc1
+add y 1
+bloc3
+
+inp w
+bloc2
+div z 1
+add x 13
+bloc1
+add y 2
+bloc3
+
+inp w
+bloc2
+div z 26
+add x 0
+bloc1
+add y 7
+bloc3
+
+inp w
+bloc2
+div z 26
+add x -5
+bloc1
+add y 5
+bloc3
+
+inp w
+bloc2
+div z 26
+add x -9
+bloc1
+add y 8
+bloc3
+
+inp w
+bloc2
+div z 26
+add x -1
+bloc1
+add y 15
+bloc3
